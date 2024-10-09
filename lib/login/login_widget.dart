@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -843,6 +844,26 @@ class _LoginWidgetState extends State<LoginWidget>
                                     ),
                                     createdTime: getCurrentTimestamp,
                                   ));
+
+                              await SendEmailToUserCall.call(
+                                to: _model.signupEmailTextController.text,
+                              );
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Check you email for a welcome message',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                  duration: const Duration(milliseconds: 10000),
+                                  backgroundColor: const Color(0xFFEE609C),
+                                ),
+                              );
 
                               context.goNamedAuth(
                                   'onboarding', context.mounted);
